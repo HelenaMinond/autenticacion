@@ -1,18 +1,23 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png" />
-    <HelloWorld msg="Welcome to Your Vue.js App" />
+  <div>
+    <b-dropdown text="H" variant="info" class="m-2">
+      <b-dropdown-item href="" @click="cerrar">Cerras sesión</b-dropdown-item>
+    </b-dropdown>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from "@/components/HelloWorld.vue";
-
+import Firebase from "firebase"
 export default {
   name: "Home",
-  components: {
-    HelloWorld,
+  methods: {
+    cerrar() {
+      Firebase.auth().signOut()
+        .then((accept) => {
+          console.log(accept);
+          this.$router.push("login");
+        });
+    },
   },
 };
 </script>
